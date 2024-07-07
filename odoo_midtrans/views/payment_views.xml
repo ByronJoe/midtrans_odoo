@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="acquirer_form_midtrans" model="ir.ui.view">
+        <field name="name">acquirer.form.midtrans</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="provider_credentials"]' position="after">
+            <group attrs="{'invisible': [('code', '!=', 'midtrans')]}">
+                <field name="midtrans_method"/>
+                <field name="midtrans_merchant_id" attrs="{'required': [('code', '=', 'midtrans'), ('state', 'in', ['enabled', 'test'])]}" />
+                <field name="midtrans_client_key" attrs="{'required': [('code', '=', 'midtrans'), ('state', 'in', ['enabled', 'test'])]}" />
+                <field name="midtrans_server_key" attrs="{'required': [('code', '=', 'midtrans'), ('state', 'in', ['enabled', 'test'])]}" />
+            </group>
+            </xpath>
+        </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="midtrans_acquirer_button">
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+        <form method="post" action="submitscript.php" target="dummyframe">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <input type="hidden" name="reference" t-att-value="reference"/>
+            <input type="hidden" name="order_id" t-att-value="order_id"/>
+            <input type="hidden" name="amount" t-att-value="amount"/>
+            <input type="hidden" name="currency_id" t-att-value="currency.id"/>
+            <input type="hidden" name='return_url' t-att-value='return_url'/>
+            <input type="hidden" name="partner_first_name" t-att-value="partner_first_name"/>
+            <input type="hidden" name="partner_last_name" t-att-value="partner_last_name"/>
+            <input type="hidden" name="partner_email" t-att-value="partner_email"/>
+            <input type="hidden" name="partner_phone" t-att-value="partner_phone"/>
+            <input type="hidden" name="billing_partner_first_name" t-att-value="billing_partner_first_name"/>
+            <input type="hidden" name="billing_partner_last_name" t-att-value="billing_partner_last_name"/>
+            <input type="hidden" name="billing_partner_email" t-att-value="billing_partner_email"/>
+            <input type="hidden" name="billing_partner_phone" t-att-value="billing_partner_phone"/>
+            <input type="hidden" name="billing_partner_address" t-att-value="billing_partner_address"/>
+            <input type="hidden" name="billing_partner_country_code" t-att-value="billing_partner_country_code"/>
+            <input type="hidden" name="billing_partner_postal_code" t-att-value="billing_partner_postal_code"/>
+            <input type="hidden" name="billing_partner_city" t-att-value="billing_partner_city"/>
+            <input id="acquirer_midtrans" type='hidden' name="acquirer" t-att-value="provider_id"/>
+            <button type="submit" width="100px" t-att-class="submit_class" id="midtrans-payment-button">
+            <img t-if="not submit_txt" src="/odoo_midtrans/static/src/img/midtrans_icon.png"/>
+            <span t-if="submit_txt"><t t-esc="submit_txt"/> <span class="fa fa-long-arrow-right"/></span>
+            <i class="fa fa-spinner fa-spin hidden"/>
+            </button>
+            <script t-att-data-client-key="client_key"></script>
+            <script><![CDATA[odoo.odoo_midtrans.attach('#midtrans-payment-button');]]></script>
+        </form>
+        </template>
+    </data>
+</odoo>
